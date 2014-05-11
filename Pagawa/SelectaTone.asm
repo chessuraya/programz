@@ -1,0 +1,119 @@
+ORG 0000H
+LJMP Start
+ORG 000BH
+LJMP IRQ2
+ORG 0030H
+
+
+
+Start: 
+CLR EA
+MOV SP, #30H
+SETB ET0
+MOV TMOD, #1H
+SETB TF0
+SETB P3.7
+
+;E5~G5C5;
+;A5~C6F5;
+;B6B6C6D6C6
+SETB EA
+Main: 
+SJMP Main
+IRQ2:
+MOV R3, #02H
+MOV R5, #0FDH
+MOV R6, #045H
+CALL PLAY
+MOV R3, #01H
+MOV R5, #0FDH
+MOV R6, #0B4H
+CALL PLAY
+MOV R3, #01H
+MOV R5, #0FCH
+MOV R6, #08FH
+CALL PLAY
+call lpause
+
+MOV R3, #03H
+MOV R5, #0FDH
+MOV R6, #0F4H
+CALL PLAY
+MOV R3, #02H
+MOV R5, #0FEH
+MOV R6, #047H
+CALL PLAY
+MOV R3, #01H
+MOV R5, #0FDH
+MOV R6, #06CH
+CALL PLAY
+call lpause
+
+MOV R3, #05H
+MOV R5, #0FFH
+MOV R6, #016H
+CALL PLAY
+MOV R3, #05H
+MOV R5, #0FFH
+MOV R6, #016H
+CALL PLAY
+MOV R3, #03H
+MOV R5, #0FEH
+MOV R6, #047H
+CALL PLAY
+MOV R3, #03H
+MOV R5, #0FEH
+MOV R6, #077H
+CALL PLAY
+MOV R3, #03H
+MOV R5, #0FEH
+MOV R6, #047H
+CALL PLAY
+
+ljmp endq
+
+
+
+play:
+MOV A, R3
+MOV R0, A
+loop1: 
+MOV R1, #0FFH ;
+loop2: CLR TR0
+MOV A, R5
+MOV TH0, A
+MOV A, R6
+MOV TL0, A
+SETB TR0
+Loop:
+JNB TF0, Loop
+CPL P3.7
+CLR TF0
+DJNZ R1, loop2
+DJNZ R0, loop1
+CALL delayn
+RET
+
+delayn:
+mov R0, #02H
+delay1: mov R1, #0FFH
+delay: DJNZ R1, delay
+DJNZ R0, delay1
+RET
+
+
+pause:
+mov R0, #02H
+ba: mov R1, #0FFH
+aa: djnz R1,aa
+DJNZ R0,ba
+RET
+
+lpause:
+mov R0, #05H
+ca: mov R1, #0FFH
+dad: djnz R1,dad
+djnz R0, ca
+RET
+ENDQ: 
+END

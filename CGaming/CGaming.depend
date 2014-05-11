@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1384600914 source:c:\users\luigi\desktop\programz\cgaming\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
+1384302917 source:c:\users\luigi\desktop\programz\cgaming\untitled2.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
+1384568704 source:c:\users\luigi\desktop\programz\cgaming\practice2.c
+	<stdio.h>
+
+1384586953 source:c:\users\luigi\desktop\programz\cgaming\fileio.c
+	<stdio.h>
+
+1384600289 source:c:\users\luigi\desktop\programz\cgaming\permute.c
+	<stdio.h>
+
+1384623125 source:c:\users\luigi\desktop\programz\cgaming\048_week1.c
+	<stdio.h>
+	<time.h>
+	<ctype.h>
+
